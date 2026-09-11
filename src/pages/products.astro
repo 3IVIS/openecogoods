@@ -54,6 +54,19 @@ const rubric = [
   title="Products"
   description="How we pick which products to design first, and the current candidate shortlist."
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "OpenEcoGoods candidate product shortlist",
+    itemListElement: rendered.map(({ entry }, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: entry.data.title,
+      description: entry.data.summary,
+      url: `https://openecogoods.com/products#${entry.id}`,
+    })),
+  })} />
+
   <section class="page-header">
     <div class="container">
       <span class="eyebrow">Products</span>
@@ -107,7 +120,7 @@ const rubric = [
             </div>
             <div class="shortlist">
               {group.items.map(({ entry, Content }) => (
-                <article class="card product">
+                <article id={entry.id} class="card product">
                   <div class="product-head">
                     <div>
                       <h4>{entry.data.title}</h4>
@@ -265,6 +278,7 @@ const rubric = [
 
   .product {
     padding: 1.75rem 2rem;
+    scroll-margin-top: 5.5rem;
   }
 
   .product-head {

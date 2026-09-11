@@ -14,6 +14,19 @@ const rendered = await Promise.all(
   title="Principles"
   description="The OpenEcoGoods principles: what counts as an ecological design here."
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "The OpenEcoGoods Principles",
+    itemListElement: rendered.map(({ entry }, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: entry.data.title,
+      description: entry.data.summary,
+      url: `https://openecogoods.com/principles#${entry.id}`,
+    })),
+  })} />
+
   <section class="page-header">
     <div class="container">
       <span class="eyebrow">Principles</span>
@@ -33,7 +46,7 @@ const rendered = await Promise.all(
     <div class="container">
       {
         rendered.map(({ entry, Content }) => (
-          <article class="card principle">
+          <article id={entry.id} class="card principle">
             <div class="principle-head">
               <span class="principle-number">{entry.data.order}</span>
               <h2>{entry.data.title}</h2>
@@ -78,6 +91,7 @@ const rendered = await Promise.all(
   .principle {
     padding: 1.75rem 2rem;
     margin-bottom: 1.25rem;
+    scroll-margin-top: 5.5rem;
   }
 
   .principle-head {

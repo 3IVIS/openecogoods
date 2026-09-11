@@ -1,0 +1,34 @@
+# OpenEcoGoods
+
+> A community project designing open-source blueprints for ecologically-sound consumer goods together — principles, product priorities, and eventual CAD/BOM designs, all developed and debated on GitHub. Published by 3IVIS GmbH. Designs are licensed CERN-OHL-S v2. v0.1, everything is a draft.
+
+OpenEcoGoods starts from the belief that most consumer goods are designed to be replaced, not repaired, and that the fix is to design openly, together, from explicit ecological principles rather than vague good intentions. The site currently has three parts: a set of draft ecological principles, a data-driven shortlist of which product categories to design first, and a GitHub-native process for anyone to challenge or extend either.
+
+## Principles
+
+- **URL**: https://openecogoods.com/principles
+- Seven draft principles (v0.1, open for revision): radical repairability, material honesty, longevity over obsolescence, local & distributed manufacture, full lifecycle transparency, open & forkable (CERN-OHL-S v2), and toxicity-free.
+- Each principle is a short markdown file in the repo (`src/content/principles/`), editable via pull request.
+
+## Product priorities
+
+- **URL**: https://openecogoods.com/products
+- A scoring rubric (environmental impact, feasibility of open/distributed manufacture, ubiquity, community interest) applied to a candidate shortlist, grouped into two tiers:
+  - **High-volume, low-lifespan everyday items**: reusable packaging systems, essential textiles & apparel basics, umbrellas, shoes — cheap, sold in the billions, discarded within months.
+  - **Longer-cycle household goods**: flat-pack repairable furniture, modular repairable cookware, home water filtration — bigger-ticket, replaced over years.
+- Each entry includes real-world example products, a sourced annual sales-volume estimate, and a typical-lifespan figure, with explicit "no reliable figure found" notes where the data doesn't exist rather than invented numbers.
+- Nothing on this list is a finalized decision — it's an opening bid for GitHub discussion.
+
+## Contributing
+
+- **URL**: https://github.com/3IVIS/openecogoods
+- Everything happens on GitHub: propose a product or a principle change via issue templates, discuss, then submit changes as pull requests against the markdown content files.
+- **License**: designs and content are published under CERN-OHL-S v2, a strongly-reciprocal open hardware license — see https://openecogoods.com/impressum and the repo's LICENSE file.
+
+## Key facts
+
+- **Status**: v0.1 — early, deliberately unfinished, built to be argued with
+- **Stack**: Astro static site, content as Markdown collections, deployed via GitHub Pages
+- **Organization**: 3IVIS GmbH (Berlin, Germany)
+- **Repository**: https://github.com/3IVIS/openecogoods
+- **Homepage**: https://openecogoods.com
