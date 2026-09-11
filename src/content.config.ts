@@ -18,6 +18,9 @@ const products = defineCollection({
     impact: z.number().min(1).max(5),
     feasibility: z.number().min(1).max(5),
     summary: z.string(),
+    examples: z.array(z.string()),
+    annualVolume: z.string(),
+    lifespan: z.string(),
   }),
 });
 

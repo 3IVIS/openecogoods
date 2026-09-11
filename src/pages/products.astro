@@ -71,12 +71,24 @@ const rubric = [
   <section class="section section-alt">
     <div class="container">
       <h2>Candidate shortlist</h2>
+      <p class="shortlist-note">
+        Volume and lifespan figures below are rough estimates drawn from
+        public reporting, not primary research — where we couldn't find a
+        credible number, we say so. Better sources welcome via GitHub.
+      </p>
       <div class="shortlist">
         {
           rendered.map(({ entry, Content }) => (
             <article class="card product">
               <div class="product-head">
-                <h3>{entry.data.title}</h3>
+                <div>
+                  <h3>{entry.data.title}</h3>
+                  <ul class="examples">
+                    {entry.data.examples.map((ex) => (
+                      <li>{ex}</li>
+                    ))}
+                  </ul>
+                </div>
                 <div class="scores">
                   <div class="score">
                     <span class="score-label">Impact</span>
@@ -98,6 +110,18 @@ const rubric = [
                   </div>
                 </div>
               </div>
+
+              <dl class="facts">
+                <div class="fact">
+                  <dt>Annual volume</dt>
+                  <dd>{entry.data.annualVolume}</dd>
+                </div>
+                <div class="fact">
+                  <dt>Typical lifespan</dt>
+                  <dd>{entry.data.lifespan}</dd>
+                </div>
+              </dl>
+
               <div class="product-body">
                 <Content />
               </div>
@@ -172,6 +196,13 @@ const rubric = [
     margin-top: 1.25rem;
   }
 
+  .shortlist-note {
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    max-width: 34rem;
+    margin: 0.5rem 0 0;
+  }
+
   .shortlist {
     display: flex;
     flex-direction: column;
@@ -194,7 +225,51 @@ const rubric = [
 
   .product-head h3 {
     font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .examples {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
     margin: 0;
+    padding: 0;
+  }
+
+  .examples li {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.75rem 1.5rem;
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: 0.6rem;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .fact dt {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.2rem;
+  }
+
+  .fact dd {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
   }
 
   .scores {
