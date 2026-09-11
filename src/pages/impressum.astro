@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Impressum"
+  description="Legal notice for OpenEcoGoods, published by 3IVIS GmbH."
+  noindex
+>
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Imprint <em>(Impressum)</em></h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <article class="card legal">
+        <div class="legal-block">
+          <h2>Information according to &sect; 5 TMG</h2>
+          <p><strong>3IVIS GmbH</strong></p>
+          <p>Plöner Str. 25</p>
+          <p>14193 Berlin</p>
+          <p>Germany</p>
+          <p class="spacer">Commercial Register: HRB 170881</p>
+          <p>Register Court: Amtsgericht Charlottenburg</p>
+          <p class="spacer">
+            Managing Director:<br /><strong>Dr. Seyed Ali Nezamoddini</strong>
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Contact</h2>
+          <p>Email: <a href="mailto:contact@3ivis.com">contact@3ivis.com</a></p>
+        </div>
+
+        <div class="legal-block">
+          <h2>VAT identification number</h2>
+          <p>
+            VAT identification number according to &sect;27 a of the German
+            VAT Act:
+          </p>
+          <p><strong>DE304631216</strong></p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Responsible for content according to &sect; 55 Abs. 2 RStV</h2>
+          <p><strong>3IVIS GmbH</strong></p>
+          <p>Plöner Str. 25</p>
+          <p>14193 Berlin</p>
+          <p>Germany</p>
+          <p class="spacer">Commercial Register: HRB 170881</p>
+          <p>Register Court: Amtsgericht Charlottenburg</p>
+          <p class="spacer">
+            Managing Director:<br /><strong>Dr. Seyed Ali Nezamoddini</strong>
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Online dispute resolution</h2>
+          <p>
+            The European Commission provides a platform for online dispute
+            resolution (OS): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. We are not willing or obliged to participate in dispute
+            resolution proceedings before a consumer arbitration board.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin: 0.5rem 0 0;
+  }
+
+  .page-header em {
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .section {
+    padding: 3rem 0 4rem;
+  }
+
+  .legal {
+    padding: 1rem 2rem;
+    max-width: 40rem;
+  }
+
+  .legal-block {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 0;
+  }
+
+  .legal-block:first-child {
+    border-top: none;
+  }
+
+  .legal-block h2 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.75rem;
+  }
+
+  .legal-block p {
+    margin: 0 0 0.2rem;
+    color: var(--ink-soft);
+  }
+
+  .legal-block p.spacer {
+    margin-top: 0.9rem;
+  }
+
+  .legal-block strong {
+    color: var(--ink);
+  }
+</style>

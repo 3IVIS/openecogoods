@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const GITHUB_URL = "https://github.com/3IVIS/openecogoods";
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 ---
@@ -16,6 +17,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{title} · OpenEcoGoods</title>
   </head>
   <body>
@@ -56,6 +58,11 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
         <p>
           A community project. Everything here is a draft, open for revision
           — <a href={GITHUB_URL}>propose a change on GitHub</a>.
+        </p>
+        <p class="footer-legal">
+          <a href={`${base}impressum`}>Impressum</a>
+          <span aria-hidden="true">·</span>
+          <a href={`${base}privacy`}>Privacy</a>
         </p>
         <p class="footer-meta">CERN-OHL-S v2 · v0.1</p>
       </div>
@@ -298,10 +305,24 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     margin: 0 0 0.5rem;
   }
 
+  .footer-legal {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-legal a {
+    color: var(--ink-soft);
+  }
+
+  .footer-legal span {
+    margin: 0 0.5rem;
+    color: var(--ink-faint);
+  }
+
   .footer-meta {
     color: var(--ink-faint);
     font-size: 0.8rem;
-    margin-top: 0.75rem;
+    margin-top: 0.5rem;
   }
 
   code,

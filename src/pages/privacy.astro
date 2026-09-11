@@ -1,0 +1,154 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Privacy policy for OpenEcoGoods, published by 3IVIS GmbH."
+  noindex
+>
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy <em>Policy</em></h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <article class="card legal">
+        <div class="legal-block">
+          <h2>Controller</h2>
+          <p>
+            <strong>3IVIS GmbH</strong><br />
+            Plöner Str. 25<br />
+            14193 Berlin, Germany<br />
+            E-Mail: <a href="mailto:contact@3ivis.com">contact@3ivis.com</a>
+          </p>
+          <p>See our <a href={`${base}impressum`}>Impressum</a> for full company details.</p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Cookies and tracking</h2>
+          <p>
+            This site does not use cookies, tracking pixels, or any
+            third-party analytics or advertising services. No consent banner
+            is shown because no tracking technologies are deployed.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Hosting</h2>
+          <p>
+            This site is hosted on <strong>GitHub Pages</strong> (GitHub,
+            Inc., a subsidiary of Microsoft Corporation). When you visit,
+            your browser connects directly to GitHub's infrastructure, which
+            may log standard access data (IP address, browser type,
+            date/time, requested URL) for security and operational purposes,
+            independent of us. See GitHub's own <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Privacy Statement</a> for details.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Contributing on GitHub</h2>
+          <p>
+            Proposing changes, opening issues, or submitting pull requests
+            happens entirely on GitHub, outside this website. Any data you
+            provide there (your GitHub account, comments, contributions) is
+            governed by GitHub's own Privacy Statement, not by us.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>External links</h2>
+          <p>
+            This site links to third-party sites, primarily <a href="https://github.com/3IVIS/openecogoods" target="_blank" rel="noopener">github.com</a>.
+            Once you follow a link, the privacy policy of that third party
+            applies. We have no control over their data practices.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Your rights</h2>
+          <p>
+            Under the GDPR you have the right to access, rectification,
+            erasure, restriction of processing, data portability, and the
+            right to object. You also have the right to lodge a complaint
+            with the German supervisory authority (Berliner Beauftragte für Datenschutz und Informationsfreiheit, <a href="https://www.datenschutz-berlin.de" target="_blank" rel="noopener">www.datenschutz-berlin.de</a>).
+          </p>
+          <p>
+            To exercise any of these rights, contact us at <a href="mailto:contact@3ivis.com">contact@3ivis.com</a>.
+          </p>
+        </div>
+
+        <div class="legal-block">
+          <h2>Changes to this policy</h2>
+          <p>
+            We may update this policy periodically. The current version is
+            always available on this page.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin: 0.5rem 0 0;
+  }
+
+  .page-header em {
+    font-style: italic;
+    color: var(--accent-dark);
+  }
+
+  .section {
+    padding: 3rem 0 4rem;
+  }
+
+  .legal {
+    padding: 1rem 2rem;
+    max-width: 40rem;
+  }
+
+  .legal-block {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 0;
+  }
+
+  .legal-block:first-child {
+    border-top: none;
+  }
+
+  .legal-block h2 {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 0.75rem;
+  }
+
+  .legal-block p {
+    margin: 0 0 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  .legal-block p:last-child {
+    margin-bottom: 0;
+  }
+
+  .legal-block strong {
+    color: var(--ink);
+  }
+</style>
