@@ -8,96 +8,237 @@ const entries = (await getCollection("products")).sort(
 const rendered = await Promise.all(
   entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
 );
+
+const rubric = [
+  {
+    title: "Environmental impact today",
+    detail: "Weighted heaviest: how much waste/emissions does this category cause right now?",
+  },
+  {
+    title: "Feasibility of open, distributed manufacture",
+    detail: "Can this realistically be built from open designs in a makerspace or small shop, without heavy capital investment?",
+  },
+  {
+    title: "Ubiquity & replaceability",
+    detail: "How standardized and genericizable is the category?",
+  },
+  {
+    title: "Likely community interest",
+    detail: "Is there existing maker/community expertise to draw on?",
+  },
+];
 ---
 
 <Layout
   title="Products"
   description="How we pick which products to design first, and the current candidate shortlist."
 >
-  <h1>What should we design first?</h1>
-  <p class="draft-note">
-    v0.1 &mdash; draft shortlist, not a decision.
-    <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-product.md">
-      Propose a product
-    </a>
-    or argue for reordering this list on GitHub.
-  </p>
-
-  <section class="rubric">
-    <h2>How we score candidates</h2>
-    <ul>
-      <li>
-        <strong>Environmental impact today</strong> &mdash; weighted heaviest:
-        how much waste/emissions does this category cause right now?
-      </li>
-      <li>
-        <strong>Feasibility of open, distributed manufacture</strong> &mdash;
-        can this realistically be built from open designs in a makerspace or
-        small shop, without heavy capital investment?
-      </li>
-      <li>
-        <strong>Ubiquity &amp; replaceability</strong> &mdash; how standardized
-        and genericizable is the category?
-      </li>
-      <li>
-        <strong>Likely community interest</strong> &mdash; is there existing
-        maker/community expertise to draw on?
-      </li>
-    </ul>
-    <p>Impact and feasibility below are rough 1&ndash;5 scores, not precise measurements.</p>
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Products</span>
+      <h1>What should we design first?</h1>
+      <p class="draft-note">
+        <span class="tag clay">v0.1 &middot; draft shortlist</span>
+        Not a decision.
+        <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-product.md">
+          Propose a product
+        </a>
+        or argue for reordering this list on GitHub.
+      </p>
+    </div>
   </section>
 
-  <section class="shortlist">
-    <h2>Candidate shortlist</h2>
-    {
-      rendered.map(({ entry, Content }) => (
-        <article class="product">
-          <h3>{entry.data.title}</h3>
-          <p class="scores">
-            Impact: {"●".repeat(entry.data.impact)}
-            {"○".repeat(5 - entry.data.impact)} &nbsp;&nbsp; Feasibility:{" "}
-            {"●".repeat(entry.data.feasibility)}
-            {"○".repeat(5 - entry.data.feasibility)}
-          </p>
-          <Content />
-        </article>
-      ))
-    }
+  <section class="section">
+    <div class="container">
+      <h2>How we score candidates</h2>
+      <ul class="grid rubric-grid">
+        {
+          rubric.map((r) => (
+            <li class="card rubric-card">
+              <strong>{r.title}</strong>
+              <p>{r.detail}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="rubric-note">
+        Impact and feasibility below are rough 1&ndash;5 scores, not precise
+        measurements.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Candidate shortlist</h2>
+      <div class="shortlist">
+        {
+          rendered.map(({ entry, Content }) => (
+            <article class="card product">
+              <div class="product-head">
+                <h3>{entry.data.title}</h3>
+                <div class="scores">
+                  <div class="score">
+                    <span class="score-label">Impact</span>
+                    <span class="score-bar">
+                      <span
+                        class="score-fill"
+                        style={`width: ${(entry.data.impact / 5) * 100}%`}
+                      />
+                    </span>
+                  </div>
+                  <div class="score">
+                    <span class="score-label">Feasibility</span>
+                    <span class="score-bar">
+                      <span
+                        class="score-fill clay"
+                        style={`width: ${(entry.data.feasibility / 5) * 100}%`}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="product-body">
+                <Content />
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
   </section>
 </Layout>
 
 <style>
+  .page-header {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 90% 0%, var(--clay-soft), transparent 50%);
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin: 0.5rem 0 1rem;
+  }
+
   .draft-note {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
     color: var(--ink-soft);
     font-size: 0.95rem;
-    margin-bottom: 2.5rem;
+    margin: 0;
   }
 
-  .rubric {
-    background: var(--paper-alt);
-    border: 1px solid var(--line);
-    border-radius: 0.5rem;
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 3rem;
+  .section {
+    padding: 3rem 0 4rem;
   }
 
-  .rubric ul {
-    padding-left: 1.25rem;
+  .section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .grid {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1rem;
+  }
+
+  .rubric-card {
+    padding: 1.25rem 1.4rem;
+  }
+
+  .rubric-card strong {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--ink);
+  }
+
+  .rubric-card p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+
+  .rubric-note {
+    color: var(--ink-faint);
+    font-size: 0.88rem;
+    margin-top: 1.25rem;
+  }
+
+  .shortlist {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
   }
 
   .product {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
+    padding: 1.75rem 2rem;
   }
 
-  .product:last-child {
-    border-bottom: none;
+  .product-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-head h3 {
+    font-size: 1.2rem;
+    margin: 0;
   }
 
   .scores {
-    font-family: "SFMono-Regular", Consolas, monospace;
-    color: var(--accent-dark);
-    letter-spacing: 0.05em;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .score {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .score-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .score-bar {
+    display: inline-block;
+    width: 5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: var(--paper-alt);
+    overflow: hidden;
+  }
+
+  .score-fill {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+  }
+
+  .score-fill.clay {
+    background: var(--clay);
+  }
+
+  .product-body :global(p) {
+    margin: 0;
+    color: var(--ink-soft);
   }
 </style>

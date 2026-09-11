@@ -14,41 +14,114 @@ const rendered = await Promise.all(
   title="Principles"
   description="The OpenEcoGoods principles: what counts as an ecological design here."
 >
-  <h1>The OpenEcoGoods Principles</h1>
-  <p class="draft-note">
-    v0.1 &mdash; draft, open for revision. Disagree with one of these?
-    <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-principle-change.md">
-      Open an issue
-    </a>
-    and make the case.
-  </p>
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Principles</span>
+      <h1>The OpenEcoGoods Principles</h1>
+      <p class="draft-note">
+        <span class="tag">v0.1 &middot; draft</span>
+        Disagree with one of these?
+        <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-principle-change.md">
+          Open an issue
+        </a>
+        and make the case.
+      </p>
+    </div>
+  </section>
 
-  {
-    rendered.map(({ entry, Content }) => (
-      <article class="principle">
-        <h2>
-          {entry.data.order}. {entry.data.title}
-        </h2>
-        <Content />
-      </article>
-    ))
-  }
+  <section class="section">
+    <div class="container">
+      {
+        rendered.map(({ entry, Content }) => (
+          <article class="card principle">
+            <div class="principle-head">
+              <span class="principle-number">{entry.data.order}</span>
+              <h2>{entry.data.title}</h2>
+            </div>
+            <div class="principle-body">
+              <Content />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
 
 <style>
+  .page-header {
+    padding: 3.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(circle at 10% 0%, var(--accent-soft), transparent 50%);
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin: 0.5rem 0 1rem;
+  }
+
   .draft-note {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
     color: var(--ink-soft);
     font-size: 0.95rem;
-    margin-bottom: 2.5rem;
+    margin: 0;
+  }
+
+  .section {
+    padding: 3rem 0 4rem;
   }
 
   .principle {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
   }
 
-  .principle:last-child {
-    border-bottom: none;
+  .principle-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .principle-number {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    font-weight: 700;
+    font-family: var(--font-serif);
+  }
+
+  .principle-head h2 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  .principle-body :global(p) {
+    margin: 0 0 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  .principle-body :global(ul) {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--ink-soft);
+  }
+
+  .principle-body :global(li) {
+    margin-bottom: 0.4rem;
+  }
+
+  .principle-body :global(li:last-child) {
+    margin-bottom: 0;
   }
 </style>
