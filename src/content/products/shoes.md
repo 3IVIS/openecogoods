@@ -14,7 +14,7 @@ lifespan: "Running shoes: ~300–500 miles, roughly 4–6 months of regular use;
 
 A running shoe or sneaker is a bonded composite — foam midsole, rubber
 outsole, textile or synthetic upper, all glued together — which is exactly
-what [material honesty](/openecogoods/principles) warns against. That
+what [material honesty](/principles) warns against. That
 construction is also why almost none of it gets recycled: separating the
 layers isn't economical, so worn-out shoes overwhelmingly go to landfill or
 incineration.
