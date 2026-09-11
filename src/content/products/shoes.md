@@ -2,9 +2,9 @@
 order: 3
 group: harder-but-worth-it
 title: Shoes
-impact: 5
+impact: 4
 feasibility: 2
-summary: The single highest-volume item on this list — tens of billions of pairs made every year, most worn out and discarded within months.
+summary: High unit volume and real mass (~8 million tonnes/yr of footwear), but full open-source manufacture of a performance shoe is a genuinely hard problem — harder than furniture or cookware.
 examples:
   - Running shoes
   - Casual sneakers

@@ -2,9 +2,9 @@
 order: 2
 group: ready-to-build
 title: Plastic bags
-impact: 5
+impact: 4
 feasibility: 4
-summary: Trillions handed out for a 12-minute average use, then centuries in the environment — reusable bags are one of the simplest fixes on this list.
+summary: Trillions handed out for a 12-minute average use — real mass too (~25 million tonnes/yr), then centuries in the environment. Reusable bags are one of the simplest fixes on this list.
 examples:
   - Grocery bags
   - Produce bags

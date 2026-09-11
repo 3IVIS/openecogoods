@@ -2,9 +2,9 @@
 order: 13
 group: ready-to-build
 title: Disposable lighters
-impact: 3
+impact: 2
 feasibility: 4
-summary: Ten billion single-use lighters a year when refillable, repairable designs have existed for a century.
+summary: Ten billion a year, but total mass (~100,000 tonnes/yr) is small — the case for redesign is durability and cost, not raw material volume, and refillable designs have existed for a century.
 examples:
   - Butane pocket lighters
   - Novelty lighters

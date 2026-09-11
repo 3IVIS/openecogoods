@@ -2,9 +2,9 @@
 order: 6
 group: harder-but-worth-it
 title: Disposable diapers
-impact: 4
+impact: 3
 feasibility: 3
-summary: Tens of billions thrown away every year and among the largest single items in landfills — cloth systems exist but absorbency engineering is nontrivial.
+summary: Tens of billions thrown away every year (~4.5 million tonnes/yr) — meaningful mass, though smaller than packaging or textiles — cloth systems exist but absorbency engineering is nontrivial.
 examples:
   - Baby diapers
   - Adult incontinence pads

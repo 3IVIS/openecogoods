@@ -2,9 +2,9 @@
 order: 7
 group: harder-but-worth-it
 title: Single-use batteries
-impact: 4
+impact: 3
 feasibility: 2
-summary: Billions of single-use cells discarded yearly, leaching heavy metals for a century or more — rechargeable systems already exist, they just need to become the default.
+summary: Total mass is moderate (~200,000 tonnes/yr), but the toxicity is disproportionate — lead, mercury, and cadmium leach for a century or more. Rechargeable systems already exist, they just need to become the default.
 examples:
   - AA/AAA alkaline cells
   - Coin cell batteries

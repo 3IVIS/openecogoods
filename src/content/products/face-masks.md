@@ -2,9 +2,9 @@
 order: 10
 group: harder-but-worth-it
 title: Disposable face masks
-impact: 4
+impact: 2
 feasibility: 3
-summary: Billions made in 2020 alone and still going — mostly polypropylene that takes centuries to break down, though high-filtration masks are a genuinely harder materials problem than basic cloth ones.
+summary: Billions made in 2020 alone, but total mass (~156,000 tonnes/yr at that peak) is modest — the real issue is microfiber shedding, not bulk, and high-filtration masks are a harder materials problem than basic cloth ones.
 examples:
   - Surgical masks
   - N95/FFP2 respirators

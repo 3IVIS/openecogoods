@@ -2,9 +2,9 @@
 order: 2
 group: harder-but-worth-it
 title: Essential textiles & apparel basics
-impact: 5
+impact: 4
 feasibility: 2
-summary: Textiles are among the most environmentally damaging consumer categories, but open, distributed garment manufacture is genuinely hard.
+summary: Still one of the largest waste-by-mass categories (~28 million tonnes/yr of garments), but open, distributed garment manufacture is genuinely hard.
 examples:
   - Basic t-shirts
   - Fast-fashion outerwear

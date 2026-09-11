@@ -2,9 +2,9 @@
 order: 6
 group: ready-to-build
 title: Toothbrushes
-impact: 4
+impact: 2
 feasibility: 4
-summary: Every plastic toothbrush ever made still exists somewhere — a simple, near-universal product that's genuinely easy to redesign with a replaceable head.
+summary: Near-universal and centuries to break down, but lightweight — total mass (~375,000 tonnes/yr) is a fraction of higher-volume categories like packaging or bottles.
 examples:
   - Manual toothbrushes
   - Electric brush heads

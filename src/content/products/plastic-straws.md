@@ -2,9 +2,9 @@
 order: 8
 group: ready-to-build
 title: Plastic straws
-impact: 3
+impact: 2
 feasibility: 5
-summary: Hundreds of billions a year for a few minutes' use each — about the simplest possible item to replace with something reusable.
+summary: Hundreds of billions a year sounds dramatic, but straws are so light that total mass (~156,000 tonnes/yr) is among the smallest waste streams here — the harm is more about wildlife ingestion than material footprint.
 examples:
   - Drink straws
   - Juice box straws

@@ -2,9 +2,9 @@
 order: 12
 group: ready-to-build
 title: Ballpoint pens
-impact: 4
+impact: 2
 feasibility: 4
-summary: Tens of billions made a year, most thrown out half-full — a refillable barrel with swappable ink cartridges is a solved, decades-old design.
+summary: Tens of billions made a year, but pens are light — total mass (~200,000 tonnes/yr) is modest. Still, a refillable barrel with swappable ink cartridges is a solved, decades-old design.
 examples:
   - Disposable ballpoints
   - Free promotional pens

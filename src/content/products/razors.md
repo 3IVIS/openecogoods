@@ -2,9 +2,9 @@
 order: 9
 group: harder-but-worth-it
 title: Disposable razors
-impact: 2
+impact: 1
 feasibility: 2
-summary: Billions of plastic razors discarded for a handful of shaves each — blade metallurgy makes a good open-source alternative harder than it looks.
+summary: Billions of plastic razors discarded for a handful of shaves each, but total mass (~55,000 tonnes/yr) is among the smallest here — blade metallurgy also makes a good open-source alternative harder than it looks.
 examples:
   - Disposable razors
   - Cartridge refill heads

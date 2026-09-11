@@ -2,9 +2,9 @@
 order: 4
 group: harder-but-worth-it
 title: Menstrual pads & tampons
-impact: 5
+impact: 3
 feasibility: 3
-summary: Hundreds of billions of plastic-heavy pads and tampons thrown out yearly; reusable cups and cloth pads already work and just need wider adoption.
+summary: Hundreds of billions disposed of yearly, but total mass (~1.2 million tonnes/yr) is more moderate than the biggest plastic waste streams — reusable cups and cloth pads already work and just need wider adoption.
 examples:
   - Disposable pads
   - Tampons

@@ -2,9 +2,9 @@
 order: 11
 group: ready-to-build
 title: Cotton swabs
-impact: 4
+impact: 2
 feasibility: 5
-summary: Hundreds of billions a year for a few seconds of use — paper or reusable-stem swabs are such a simple fix that the EU has already banned the plastic version.
+summary: Astonishing unit count (~550 billion/yr) but almost no total mass (~165,000 tonnes/yr) — the harm is ecological (a top item in coastal cleanups), not material volume. Paper-stem swabs already exist as a fix.
 examples:
   - Cotton swabs / Q-tips
   - Ear-cleaning swabs

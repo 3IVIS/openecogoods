@@ -2,9 +2,9 @@
 order: 4
 group: ready-to-build
 title: Umbrellas
-impact: 4
+impact: 2
 feasibility: 4
-summary: Cheap umbrellas are built to fail — one bent rib or blown-out canopy sends the whole thing straight to the bin.
+summary: Individually simple to fix (a rib joint, a spring), but total mass (~400,000 tonnes/yr) is modest next to the real heavyweights on this list.
 examples:
   - Folding pocket umbrellas
   - Cheap street-vendor umbrellas
