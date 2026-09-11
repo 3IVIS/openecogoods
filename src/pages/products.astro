@@ -24,12 +24,23 @@ const groupInfo = {
   },
 } as const;
 
+const VISIBLE_PER_GROUP = 4;
+
 const groups = (Object.keys(groupInfo) as Array<keyof typeof groupInfo>).map(
-  (key) => ({
-    key,
-    ...groupInfo[key],
-    items: entries.filter((e) => e.data.group === key),
-  }),
+  (key) => {
+    const items = entries
+      .filter((e) => e.data.group === key)
+      .sort(
+        (a, b) =>
+          b.data.impact - a.data.impact || b.data.feasibility - a.data.feasibility,
+      );
+    return {
+      key,
+      ...groupInfo[key],
+      items,
+      visibleCount: Math.min(VISIBLE_PER_GROUP, items.length),
+    };
+  },
 );
 
 const rubric = [
@@ -108,76 +119,114 @@ const rubric = [
     <div class="container">
       <h2>Candidate shortlist</h2>
       <p class="shortlist-note">
-        Volume, lifespan, and decomposition figures below are rough estimates
-        drawn from public reporting, not primary research — where we
-        couldn't find a credible number, we say so. Better sources welcome
-        via GitHub.
+        Sorted by impact within each group — highest first. Volume, lifespan,
+        and decomposition figures are rough estimates drawn from public
+        reporting, not primary research — where we couldn't find a credible
+        number, we say so. Better sources welcome via GitHub.
       </p>
 
       {
-        groups.map((group) => (
-          <div class="product-group">
-            <div class="group-head">
-              <h3>{group.title}</h3>
-              <p>{group.intro}</p>
-            </div>
-            <div class="shortlist">
-              {group.items.map((entry) => (
-                <article id={entry.id} class="card product">
-                  <div class="product-head">
-                    <h4>{entry.data.title}</h4>
-                    <div class="scores">
-                      <div class="score">
-                        <span class="score-label">Impact</span>
-                        <span class="score-bar">
-                          <span
-                            class="score-fill"
-                            style={`width: ${(entry.data.impact / 5) * 100}%`}
-                          />
-                        </span>
+        groups.map((group) => {
+          const hiddenCount = group.items.length - group.visibleCount;
+          return (
+            <div class="product-group">
+              <div class="group-head">
+                <h3>{group.title}</h3>
+                <p>{group.intro}</p>
+              </div>
+              <div class="shortlist" data-group={group.key}>
+                {group.items.map((entry, i) => {
+                  const isExtra = i >= group.visibleCount;
+                  return (
+                    <article
+                      id={entry.id}
+                      class:list={["card", "product", { extra: isExtra }]}
+                      hidden={isExtra}
+                    >
+                      <div class="product-head">
+                        <h4>{entry.data.title}</h4>
+                        <div class="scores">
+                          <div class="score">
+                            <span class="score-label">Impact</span>
+                            <span class="score-bar">
+                              <span
+                                class="score-fill"
+                                style={`width: ${(entry.data.impact / 5) * 100}%`}
+                              />
+                            </span>
+                          </div>
+                          <div class="score">
+                            <span class="score-label">Feasibility</span>
+                            <span class="score-bar">
+                              <span
+                                class="score-fill clay"
+                                style={`width: ${(entry.data.feasibility / 5) * 100}%`}
+                              />
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div class="score">
-                        <span class="score-label">Feasibility</span>
-                        <span class="score-bar">
-                          <span
-                            class="score-fill clay"
-                            style={`width: ${(entry.data.feasibility / 5) * 100}%`}
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
 
-                  <ul class="examples">
-                    {entry.data.examples.map((ex) => (
-                      <li>{ex}</li>
-                    ))}
-                  </ul>
+                      <ul class="examples">
+                        {entry.data.examples.map((ex) => (
+                          <li>{ex}</li>
+                        ))}
+                      </ul>
 
-                  <dl class="facts">
-                    <div class="fact">
-                      <dt>Annual volume</dt>
-                      <dd>{entry.data.annualVolume}</dd>
-                    </div>
-                    <div class="fact">
-                      <dt>Time in use</dt>
-                      <dd>{entry.data.lifespan}</dd>
-                    </div>
-                    <div class="fact">
-                      <dt>Time to return to nature</dt>
-                      <dd>{entry.data.decompose}</dd>
-                    </div>
-                  </dl>
+                      <dl class="facts">
+                        <div class="fact">
+                          <dt>Annual volume</dt>
+                          <dd>{entry.data.annualVolume}</dd>
+                        </div>
+                        <div class="fact">
+                          <dt>Time in use</dt>
+                          <dd>{entry.data.lifespan}</dd>
+                        </div>
+                        <div class="fact">
+                          <dt>Time to return to nature</dt>
+                          <dd>{entry.data.decompose}</dd>
+                        </div>
+                      </dl>
 
-                  <p class="product-summary">{entry.data.summary}</p>
-                </article>
-              ))}
+                      <p class="product-summary">{entry.data.summary}</p>
+                    </article>
+                  );
+                })}
+              </div>
+              {hiddenCount > 0 && (
+                <button
+                  type="button"
+                  class="show-more-btn"
+                  data-target={group.key}
+                  data-show-label={`Show ${hiddenCount} more`}
+                  aria-expanded="false"
+                >
+                  {`Show ${hiddenCount} more`}
+                </button>
+              )}
             </div>
-          </div>
-        ))
+          );
+        })
       }
     </div>
   </section>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>(".show-more-btn").forEach((btn) => {
+      const group = btn.dataset.target;
+      const extras = document.querySelectorAll<HTMLElement>(
+        `.shortlist[data-group="${group}"] .extra`,
+      );
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        extras.forEach((el) => {
+          el.hidden = expanded;
+        });
+        btn.setAttribute("aria-expanded", String(!expanded));
+        btn.textContent = expanded ? (btn.dataset.showLabel ?? "") : "Show fewer";
+      });
+    });
+  </script>
 </Layout>
 
 <style>
@@ -392,5 +441,25 @@ const rubric = [
     color: var(--ink-soft);
     font-size: 0.86rem;
     line-height: 1.4;
+  }
+
+  .show-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper-alt);
+    color: var(--ink);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .show-more-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 </style>
