@@ -1,5 +1,6 @@
 ---
 order: 2
+group: longer-cycle
 title: Modular, repairable cookware
 impact: 4
 feasibility: 3

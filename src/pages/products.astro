@@ -9,6 +9,27 @@ const rendered = await Promise.all(
   entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
 );
 
+const groupInfo = {
+  everyday: {
+    title: "High-volume, low-lifespan everyday items",
+    intro:
+      "Individually cheap, sold in the billions, and discarded within months rather than years. The cumulative impact comes from volume × turnover, not any single item's footprint.",
+  },
+  "longer-cycle": {
+    title: "Longer-cycle household goods",
+    intro:
+      "Bigger-ticket, more considered purchases, replaced over years rather than months — the impact case here is more about material honesty and repairability than raw churn.",
+  },
+} as const;
+
+const groups = (Object.keys(groupInfo) as Array<keyof typeof groupInfo>).map(
+  (key) => ({
+    key,
+    ...groupInfo[key],
+    items: rendered.filter((r) => r.entry.data.group === key),
+  }),
+);
+
 const rubric = [
   {
     title: "Environmental impact today",
@@ -76,59 +97,68 @@ const rubric = [
         public reporting, not primary research — where we couldn't find a
         credible number, we say so. Better sources welcome via GitHub.
       </p>
-      <div class="shortlist">
-        {
-          rendered.map(({ entry, Content }) => (
-            <article class="card product">
-              <div class="product-head">
-                <div>
-                  <h3>{entry.data.title}</h3>
-                  <ul class="examples">
-                    {entry.data.examples.map((ex) => (
-                      <li>{ex}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div class="scores">
-                  <div class="score">
-                    <span class="score-label">Impact</span>
-                    <span class="score-bar">
-                      <span
-                        class="score-fill"
-                        style={`width: ${(entry.data.impact / 5) * 100}%`}
-                      />
-                    </span>
-                  </div>
-                  <div class="score">
-                    <span class="score-label">Feasibility</span>
-                    <span class="score-bar">
-                      <span
-                        class="score-fill clay"
-                        style={`width: ${(entry.data.feasibility / 5) * 100}%`}
-                      />
-                    </span>
-                  </div>
-                </div>
-              </div>
 
-              <dl class="facts">
-                <div class="fact">
-                  <dt>Annual volume</dt>
-                  <dd>{entry.data.annualVolume}</dd>
-                </div>
-                <div class="fact">
-                  <dt>Typical lifespan</dt>
-                  <dd>{entry.data.lifespan}</dd>
-                </div>
-              </dl>
+      {
+        groups.map((group) => (
+          <div class="product-group">
+            <div class="group-head">
+              <h3>{group.title}</h3>
+              <p>{group.intro}</p>
+            </div>
+            <div class="shortlist">
+              {group.items.map(({ entry, Content }) => (
+                <article class="card product">
+                  <div class="product-head">
+                    <div>
+                      <h4>{entry.data.title}</h4>
+                      <ul class="examples">
+                        {entry.data.examples.map((ex) => (
+                          <li>{ex}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div class="scores">
+                      <div class="score">
+                        <span class="score-label">Impact</span>
+                        <span class="score-bar">
+                          <span
+                            class="score-fill"
+                            style={`width: ${(entry.data.impact / 5) * 100}%`}
+                          />
+                        </span>
+                      </div>
+                      <div class="score">
+                        <span class="score-label">Feasibility</span>
+                        <span class="score-bar">
+                          <span
+                            class="score-fill clay"
+                            style={`width: ${(entry.data.feasibility / 5) * 100}%`}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-              <div class="product-body">
-                <Content />
-              </div>
-            </article>
-          ))
-        }
-      </div>
+                  <dl class="facts">
+                    <div class="fact">
+                      <dt>Annual volume</dt>
+                      <dd>{entry.data.annualVolume}</dd>
+                    </div>
+                    <div class="fact">
+                      <dt>Typical lifespan</dt>
+                      <dd>{entry.data.lifespan}</dd>
+                    </div>
+                  </dl>
+
+                  <div class="product-body">
+                    <Content />
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))
+      }
     </div>
   </section>
 </Layout>
@@ -203,11 +233,34 @@ const rubric = [
     margin: 0.5rem 0 0;
   }
 
+  .product-group {
+    margin-top: 2.5rem;
+  }
+
+  .product-group:first-child {
+    margin-top: 1.5rem;
+  }
+
+  .group-head {
+    margin-bottom: 1.25rem;
+  }
+
+  .group-head h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.35rem;
+  }
+
+  .group-head p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    max-width: 38rem;
+  }
+
   .shortlist {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    margin-top: 1.5rem;
   }
 
   .product {
@@ -223,7 +276,7 @@ const rubric = [
     margin-bottom: 0.5rem;
   }
 
-  .product-head h3 {
+  .product-head h4 {
     font-size: 1.2rem;
     margin: 0 0 0.5rem;
   }

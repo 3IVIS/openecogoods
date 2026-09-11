@@ -1,5 +1,6 @@
 ---
 order: 1
+group: longer-cycle
 title: Flat-pack, repairable furniture
 impact: 5
 feasibility: 5

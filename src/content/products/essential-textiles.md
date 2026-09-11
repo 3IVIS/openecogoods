@@ -1,5 +1,6 @@
 ---
-order: 4
+order: 5
+group: everyday
 title: Essential textiles & apparel basics
 impact: 5
 feasibility: 2

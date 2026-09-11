@@ -21,6 +21,7 @@ const products = defineCollection({
     examples: z.array(z.string()),
     annualVolume: z.string(),
     lifespan: z.string(),
+    group: z.enum(["everyday", "longer-cycle"]),
   }),
 });
 

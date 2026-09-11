@@ -1,5 +1,6 @@
 ---
-order: 5
+order: 3
+group: longer-cycle
 title: Home water filtration
 impact: 3
 feasibility: 4

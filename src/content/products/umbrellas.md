@@ -1,5 +1,6 @@
 ---
 order: 6
+group: everyday
 title: Umbrellas
 impact: 4
 feasibility: 4
