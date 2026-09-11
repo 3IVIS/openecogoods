@@ -1,0 +1,103 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+const entries = (await getCollection("products")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const rendered = await Promise.all(
+  entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
+---
+
+<Layout
+  title="Products"
+  description="How we pick which products to design first, and the current candidate shortlist."
+>
+  <h1>What should we design first?</h1>
+  <p class="draft-note">
+    v0.1 &mdash; draft shortlist, not a decision.
+    <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-product.md">
+      Propose a product
+    </a>
+    or argue for reordering this list on GitHub.
+  </p>
+
+  <section class="rubric">
+    <h2>How we score candidates</h2>
+    <ul>
+      <li>
+        <strong>Environmental impact today</strong> &mdash; weighted heaviest:
+        how much waste/emissions does this category cause right now?
+      </li>
+      <li>
+        <strong>Feasibility of open, distributed manufacture</strong> &mdash;
+        can this realistically be built from open designs in a makerspace or
+        small shop, without heavy capital investment?
+      </li>
+      <li>
+        <strong>Ubiquity &amp; replaceability</strong> &mdash; how standardized
+        and genericizable is the category?
+      </li>
+      <li>
+        <strong>Likely community interest</strong> &mdash; is there existing
+        maker/community expertise to draw on?
+      </li>
+    </ul>
+    <p>Impact and feasibility below are rough 1&ndash;5 scores, not precise measurements.</p>
+  </section>
+
+  <section class="shortlist">
+    <h2>Candidate shortlist</h2>
+    {
+      rendered.map(({ entry, Content }) => (
+        <article class="product">
+          <h3>{entry.data.title}</h3>
+          <p class="scores">
+            Impact: {"●".repeat(entry.data.impact)}
+            {"○".repeat(5 - entry.data.impact)} &nbsp;&nbsp; Feasibility:{" "}
+            {"●".repeat(entry.data.feasibility)}
+            {"○".repeat(5 - entry.data.feasibility)}
+          </p>
+          <Content />
+        </article>
+      ))
+    }
+  </section>
+</Layout>
+
+<style>
+  .draft-note {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .rubric {
+    background: var(--paper-alt);
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .rubric ul {
+    padding-left: 1.25rem;
+  }
+
+  .product {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .product:last-child {
+    border-bottom: none;
+  }
+
+  .scores {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    color: var(--accent-dark);
+    letter-spacing: 0.05em;
+  }
+</style>

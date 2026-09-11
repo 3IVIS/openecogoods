@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+
+const entries = (await getCollection("principles")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const rendered = await Promise.all(
+  entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
+---
+
+<Layout
+  title="Principles"
+  description="The OpenEcoGoods principles: what counts as an ecological design here."
+>
+  <h1>The OpenEcoGoods Principles</h1>
+  <p class="draft-note">
+    v0.1 &mdash; draft, open for revision. Disagree with one of these?
+    <a href="https://github.com/3IVIS/openecogoods/issues/new?template=propose-principle-change.md">
+      Open an issue
+    </a>
+    and make the case.
+  </p>
+
+  {
+    rendered.map(({ entry, Content }) => (
+      <article class="principle">
+        <h2>
+          {entry.data.order}. {entry.data.title}
+        </h2>
+        <Content />
+      </article>
+    ))
+  }
+</Layout>
+
+<style>
+  .draft-note {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .principle {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .principle:last-child {
+    border-bottom: none;
+  }
+</style>

@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const principles = (await getCollection("principles")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const products = (await getCollection("products")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+---
+
+<Layout
+  title="Home"
+  description="Open-source designs for ecologically-sound consumer goods, made together."
+>
+  <section class="hero">
+    <h1>Open-source designs for ecologically-sound consumer goods.</h1>
+    <p class="lede">
+      OpenEcoGoods is a community effort to design consumer products that are
+      genuinely built to last, repair, and return safely to the earth &mdash;
+      and to publish those designs openly so anyone can build, improve, or
+      manufacture them. Nothing here is finished. It's meant to be argued
+      with.
+    </p>
+  </section>
+
+  <section>
+    <h2>What "ecological" means here</h2>
+    <p>
+      We work from a short, opinionated set of principles rather than vague
+      good intentions. They're a draft &mdash; v0.1 &mdash; open for revision.
+    </p>
+    <ol class="principles-list">
+      {
+        principles.map((p) => (
+          <li>
+            <strong>{p.data.title}</strong> &mdash; {p.data.summary}
+          </li>
+        ))
+      }
+    </ol>
+    <p><a href={`${base}principles`}>Read the full principles &rarr;</a></p>
+  </section>
+
+  <section>
+    <h2>What we're designing first</h2>
+    <p>
+      We can't start everywhere. Below is a draft shortlist of candidate
+      product categories, scored on environmental impact and how feasible
+      open, distributed manufacture actually is &mdash; not a decision, an
+      opening bid for discussion.
+    </p>
+    <ul class="products-list">
+      {
+        products.map((p) => (
+          <li>
+            <strong>{p.data.title}</strong> &mdash; {p.data.summary}
+          </li>
+        ))
+      }
+    </ul>
+    <p><a href={`${base}products`}>See the full scoring &amp; shortlist &rarr;</a></p>
+  </section>
+
+  <section>
+    <h2>How to contribute</h2>
+    <p>
+      Everything happens on GitHub &mdash; propose a product, challenge a
+      principle, or submit a design as a pull request.
+    </p>
+    <p>
+      <a href="https://github.com/3IVIS/openecogoods">
+        github.com/3IVIS/openecogoods &rarr;
+      </a>
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    margin-bottom: 3rem;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  .principles-list,
+  .products-list {
+    padding-left: 1.25rem;
+  }
+
+  .principles-list li,
+  .products-list li {
+    margin-bottom: 0.6rem;
+  }
+</style>
